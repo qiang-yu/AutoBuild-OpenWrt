@@ -64,7 +64,7 @@ jobs:
       run: |
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt            
-        git reset --hard  9bc05c5ce39c4dc34161af0e6940a622793b01e7  
+        git reset --hard  96f26d716a0301224fa966312ea8d7a6c0a6a8b1  
      #   sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
         
     - name: Update & Install feeds
@@ -102,7 +102,8 @@ jobs:
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
-        make -j$(nproc) V=s
+   #   make -j$(nproc) V=s
+        make -j1 V=s 
 
     - name : Upload artifact
       uses: actions/upload-artifact@master
