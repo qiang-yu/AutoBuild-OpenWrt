@@ -64,7 +64,7 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
+     #   sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
         
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -74,10 +74,13 @@ jobs:
         ./scripts/feeds install -a
         ./scripts/feeds install -a
 
-    #- name: Import external feeds
-    #  working-directory: ./openwrt
-    #  run: |
-    #    git clone --depth 1 https://github.com/Mattraks/helloworld.git -b Preview package/helloworld   
+    - name: Import helloworld
+      working-directory: ./openwrt
+      run: |
+        git clone https://github.com/fw876/helloworld.git package/helloworld
+        cd package/helloworld
+        git reset --hard  477f96149d01ac893899bc3c545aa01fb8b4344d 
+        cd ../../
 
     - name: Configuration Customization - Build_x86_64
       env:
@@ -85,7 +88,7 @@ jobs:
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
-        cd openwrt && make defconfig
+    #  cd openwrt && make defconfig
         
     - name: Download package
       working-directory: ./openwrt
