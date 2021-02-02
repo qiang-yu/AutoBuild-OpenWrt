@@ -63,7 +63,8 @@ jobs:
         REPO_BRANCH: master
       run: |
         git clone $REPO_URL -b $REPO_BRANCH openwrt
-        cd openwrt
+        cd openwrt            
+        git reset --hard  9bc05c5ce39c4dc34161af0e6940a622793b01e7  
      #   sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
         
     - name: Update & Install feeds
