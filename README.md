@@ -21,3 +21,14 @@ You could edit and enable "Sync Code" YAML file to let your forked repo keep upd
 **3. Sync Code**
   - Uncomment 'push-branches-master' 3 lines under **`On`** section and commit changes to let the script sync the code once for you.
   - Uncomment 'schedule-cron' 2 lines under **`On`** section and commit changes to let the script sync the code everyday on 3 am[UTC +8]
+
+**4. 怎么获得你想要的配置 .config 文件**
+  - git clone https://github.com/coolsnowwolf/lede openwrt 
+  - cd openwrt
+  - echo "src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom.git" >> feeds.conf.default 
+  - ./scripts/feeds update -a  
+  - ./scripts/feeds install -a    
+  - git clone https://github.com/fw876/helloworld.git package/shadowsocks-plus  
+  - make clean
+  - make menuconfig
+  - 把生成的 .config 文件复制到这个工程，就可以让 github action 自动编译了   
